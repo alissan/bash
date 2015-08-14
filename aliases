@@ -1,0 +1,73 @@
+#
+#bash aliases
+
+alias y="youtube-dl --extract-audio --audio-format mp3"
+
+alias webshare="cd /var/www;python -m SimpleHTTPServer"
+alias py="python -c"
+
+mcd() { mkdir -p "$1"; cd "$1";}
+alias mountc="mount | column -t"
+alias ps.="ps aux | grep"
+alias ipinfo="curl ifconfig.me && curl ifconfig.me/host"
+alias listen='lsof -P -i -n'
+
+alias genpasswd="strings /dev/urandom | grep -o '[[:alnum:]]' | head -n 30 | tr -d '\n'; echo"
+
+alias cats="cat /var/log/syslog"
+alias ts="tail -f /var/log/syslog"
+
+alias p='ps -ef --sort=start_time|grep -vE "\]$"'
+
+
+alias ds="dstat --nocolor -c -m -d -r --fs --disk-util -n --tcp --udp"
+
+alias .="cd .."
+alias l='ls -lahSr'
+alias r="ip route list;echo;route -n"
+alias d='watch -d=cumulative "df -Tlh -x devtmpfs -x tmpfs;echo;df -Tl -x devtmpfs -x tmpfs;echo;echo"'
+
+
+alias n="netstat -luntp"
+alias ll='ls -laF'
+alias g="grep -ir"
+
+alias ipt='iptables -L -v --line-numbers'
+alias lastpackages='cat dpkg.log*|grep -E " install "|sort'
+
+
+#lvmsum: lvm summary
+alias lvmsum=' \
+echo "-----------------------------------------------------------"; \
+pvdisplay |grep -E "Physical volume|PV Name|VG Name|PV Size"; \
+echo "-----------------------------------------------------------"; \
+lvdisplay |grep -E "Logical volume|LV Path|LV Name|VG Name|LV Size|LV Status"; \
+echo "-----------------------------------------------------------"; \
+vgdisplay |grep -E "Volume group|VG Name|VG Size"; \
+echo "-----------------------------------------------------------"'
+
+#extract file
+extract() { 
+    if [ -f $1 ] ; then 
+      case $1 in 
+        *.tar.bz2)   tar xjf $1     ;; 
+        *.tar.gz)    tar xzf $1     ;; 
+        *.bz2)       bunzip2 $1     ;; 
+        *.rar)       unrar e $1     ;; 
+        *.gz)        gunzip $1      ;; 
+        *.tar)       tar xf $1      ;; 
+        *.tbz2)      tar xjf $1     ;; 
+        *.tgz)       tar xzf $1     ;; 
+        *.zip)       unzip $1       ;; 
+        *.Z)         uncompress $1  ;; 
+        *.7z)        7z x $1        ;; 
+        *)     echo "'$1' cannot be extracted via extract()" ;; 
+         esac 
+     else 
+         echo "'$1' is not a valid file" 
+     fi 
+}
+#extract file
+
+
+
